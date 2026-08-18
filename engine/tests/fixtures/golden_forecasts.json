@@ -1,0 +1,1499 @@
+{
+ "_corpus_fingerprint": {
+  "buckets": 18144,
+  "dates": 290,
+  "hospitals": 18,
+  "sha256": "e415ca78d78cb41e5ef195a6d0291cfc9aeb49db13b6fa2affe97d72e278fc3c",
+  "snapshots": 23422
+ },
+ "_excluded_on_purpose": "live published minutes, travel time and traffic are NOT recorded: they change every 15 minutes and would make the suite flaky. Every case supplies its own `published` value as an explicit input.",
+ "_read_this_first": "Regenerate ONLY for an intentional corpus or maths change, as its own reviewable commit. If _corpus_fingerprint below no longer matches the corpus on disk, this file is stale and every number in it describes a corpus that no longer exists.",
+ "_recorded_fields": [
+  "answered",
+  "forecast_median",
+  "forecast_p25",
+  "forecast_p75",
+  "basis",
+  "pooled",
+  "n_observations",
+  "verdict"
+ ],
+ "_regenerate_with": "cd engine && uv run python -m tests.regen_golden",
+ "_what": "Frozen forecast output for a fixed, deterministic query matrix. tests/test_forecast_golden.py re-runs the matrix and requires byte-identical results. This is the project's forecast-regression detector.",
+ "cases": {
+  "bound|Prince of Wales Hospital|t3|Monday|0|pub45": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Prince of Wales Hospital",
+    "hour": 0,
+    "published": 45.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "hour-of-week arithmetic at the ends of the week",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 33.5,
+   "forecast_p25": 28.0,
+   "forecast_p75": 42.0,
+   "n_observations": 162,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "bound|Prince of Wales Hospital|t3|Sunday|23|pub45": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Prince of Wales Hospital",
+    "hour": 23,
+    "published": 45.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "hour-of-week arithmetic at the ends of the week",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 35.0,
+   "forecast_p25": 30.0,
+   "forecast_p75": 43.0,
+   "n_observations": 123,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "bound|Prince of Wales Hospital|t3|Thursday|12|pub45": {
+   "_input": {
+    "day": "Thursday",
+    "hospital": "Prince of Wales Hospital",
+    "hour": 12,
+    "published": 45.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "hour-of-week arithmetic at the ends of the week",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 26.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 31.0,
+   "n_observations": 160,
+   "pooled": false,
+   "verdict": "caution"
+  },
+  "exact|Alice Ho Miu Ling Nethersole Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Alice Ho Miu Ling Nethersole Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 24.0,
+   "forecast_p25": 19.0,
+   "forecast_p75": 32.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Alice Ho Miu Ling Nethersole Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Alice Ho Miu Ling Nethersole Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 26.0,
+   "forecast_p25": 22.0,
+   "forecast_p75": 32.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Alice Ho Miu Ling Nethersole Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Alice Ho Miu Ling Nethersole Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 90.0,
+   "forecast_p25": 60.0,
+   "forecast_p75": 120.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Caritas Medical Centre|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Caritas Medical Centre",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 25.0,
+   "forecast_p25": 20.0,
+   "forecast_p75": 31.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Caritas Medical Centre|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Caritas Medical Centre",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 21.0,
+   "forecast_p25": 19.0,
+   "forecast_p75": 25.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Caritas Medical Centre|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Caritas Medical Centre",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 150.0,
+   "forecast_p25": 120.0,
+   "forecast_p75": 210.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "caution"
+  },
+  "exact|Kwong Wah Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Kwong Wah Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 31.5,
+   "forecast_p25": 26.0,
+   "forecast_p75": 40.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "caution"
+  },
+  "exact|Kwong Wah Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Kwong Wah Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 33.0,
+   "forecast_p25": 28.0,
+   "forecast_p75": 42.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Kwong Wah Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Kwong Wah Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 240.0,
+   "forecast_p25": 165.0,
+   "forecast_p75": 330.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "exact|North District Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "North District Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 30.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 37.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "caution"
+  },
+  "exact|North District Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "North District Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 26.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 32.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|North District Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "North District Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 180.0,
+   "forecast_p25": 120.0,
+   "forecast_p75": 270.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "exact|North Lantau Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "North Lantau Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 25.0,
+   "forecast_p25": 22.0,
+   "forecast_p75": 27.25,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|North Lantau Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "North Lantau Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 17.5,
+   "forecast_p25": 15.0,
+   "forecast_p75": 20.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|North Lantau Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "North Lantau Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 120.0,
+   "forecast_p25": 90.0,
+   "forecast_p75": 150.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "caution"
+  },
+  "exact|Pamela Youde Nethersole Eastern Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Pamela Youde Nethersole Eastern Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 31.0,
+   "forecast_p25": 22.0,
+   "forecast_p75": 43.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "caution"
+  },
+  "exact|Pamela Youde Nethersole Eastern Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Pamela Youde Nethersole Eastern Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 24.0,
+   "forecast_p25": 19.0,
+   "forecast_p75": 31.25,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Pamela Youde Nethersole Eastern Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Pamela Youde Nethersole Eastern Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 270.0,
+   "forecast_p25": 180.0,
+   "forecast_p75": 420.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "exact|Pok Oi Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Pok Oi Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 20.0,
+   "forecast_p25": 18.0,
+   "forecast_p75": 23.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Pok Oi Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Pok Oi Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 19.0,
+   "forecast_p25": 16.0,
+   "forecast_p75": 21.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Pok Oi Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Pok Oi Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 210.0,
+   "forecast_p25": 150.0,
+   "forecast_p75": 255.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "exact|Prince of Wales Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Prince of Wales Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 25.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 31.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Prince of Wales Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Prince of Wales Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 32.5,
+   "forecast_p25": 25.75,
+   "forecast_p75": 38.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Prince of Wales Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Prince of Wales Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 210.0,
+   "forecast_p25": 150.0,
+   "forecast_p75": 300.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "exact|Princess Margaret Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Princess Margaret Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 31.0,
+   "forecast_p25": 24.75,
+   "forecast_p75": 41.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "caution"
+  },
+  "exact|Princess Margaret Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Princess Margaret Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 27.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 32.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Princess Margaret Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Princess Margaret Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 210.0,
+   "forecast_p25": 150.0,
+   "forecast_p75": 270.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "exact|Queen Elizabeth Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Queen Elizabeth Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 13.0,
+   "forecast_p25": 9.0,
+   "forecast_p75": 17.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Queen Elizabeth Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Queen Elizabeth Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 16.0,
+   "forecast_p25": 14.0,
+   "forecast_p75": 21.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Queen Elizabeth Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Queen Elizabeth Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 90.0,
+   "forecast_p25": 60.0,
+   "forecast_p75": 120.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Queen Mary Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 29.0,
+   "forecast_p25": 27.0,
+   "forecast_p75": 34.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Queen Mary Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 26.0,
+   "forecast_p25": 23.0,
+   "forecast_p75": 29.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Queen Mary Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 210.0,
+   "forecast_p25": 150.0,
+   "forecast_p75": 240.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "exact|Ruttonjee Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Ruttonjee Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 28.0,
+   "forecast_p25": 23.0,
+   "forecast_p75": 33.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Ruttonjee Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Ruttonjee Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 18.0,
+   "forecast_p25": 15.0,
+   "forecast_p75": 22.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Ruttonjee Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Ruttonjee Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 150.0,
+   "forecast_p25": 120.0,
+   "forecast_p75": 210.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "caution"
+  },
+  "exact|St John Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "St John Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 15.0,
+   "forecast_p25": 14.0,
+   "forecast_p75": 16.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|St John Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "St John Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 0,
+   "forecast_p25": 0,
+   "forecast_p75": 15.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|St John Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "St John Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 30.0,
+   "forecast_p25": 0,
+   "forecast_p75": 30.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Tin Shui Wai Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Tin Shui Wai Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 17.0,
+   "forecast_p25": 14.0,
+   "forecast_p75": 19.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Tin Shui Wai Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Tin Shui Wai Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 13.0,
+   "forecast_p25": 12.0,
+   "forecast_p75": 16.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Tin Shui Wai Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Tin Shui Wai Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 180.0,
+   "forecast_p25": 90.0,
+   "forecast_p75": 270.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "exact|Tseung Kwan O Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Tseung Kwan O Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 26.0,
+   "forecast_p25": 20.0,
+   "forecast_p75": 36.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "caution"
+  },
+  "exact|Tseung Kwan O Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Tseung Kwan O Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 21.0,
+   "forecast_p25": 16.0,
+   "forecast_p75": 25.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Tseung Kwan O Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Tseung Kwan O Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 240.0,
+   "forecast_p25": 150.0,
+   "forecast_p75": 300.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "exact|Tuen Mun Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Tuen Mun Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 22.0,
+   "forecast_p25": 17.0,
+   "forecast_p75": 26.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Tuen Mun Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Tuen Mun Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 20.0,
+   "forecast_p25": 16.0,
+   "forecast_p75": 25.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Tuen Mun Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Tuen Mun Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 300.0,
+   "forecast_p25": 270.0,
+   "forecast_p75": 360.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "caution"
+  },
+  "exact|United Christian Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "United Christian Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 28.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 35.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|United Christian Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "United Christian Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 26.0,
+   "forecast_p25": 20.0,
+   "forecast_p75": 31.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|United Christian Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "United Christian Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 270.0,
+   "forecast_p25": 210.0,
+   "forecast_p75": 360.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "exact|Yan Chai Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Yan Chai Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "dense weekday-afternoon exact-hour bucket, live figure supplied",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 28.0,
+   "forecast_p25": 22.0,
+   "forecast_p75": 37.0,
+   "n_observations": 164,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "exact|Yan Chai Hospital|t3|Sunday|03|nopub": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "Yan Chai Hospital",
+    "hour": 3,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "quiet hour with the live feed unavailable -> verdict no_live_data",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 20.0,
+   "forecast_p25": 18.0,
+   "forecast_p75": 23.0,
+   "n_observations": 124,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "exact|Yan Chai Hospital|t45|Friday|20|pub240": {
+   "_input": {
+    "day": "Friday",
+    "hospital": "Yan Chai Hospital",
+    "hour": 20,
+    "published": 240.0,
+    "section": "query",
+    "triage": "t45"
+   },
+   "_why": "Friday-evening peak, semi-urgent triage",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 180.0,
+   "forecast_p25": 120.0,
+   "forecast_p75": 240.0,
+   "n_observations": 159,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "refuse|Nonexistent Hospital|t3|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Nonexistent Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "unknown hospital -> refuse rather than fall through to a default",
+   "answered": false,
+   "basis": null,
+   "forecast_median": null,
+   "forecast_p25": null,
+   "forecast_p75": null,
+   "n_observations": null,
+   "pooled": null,
+   "verdict": null
+  },
+  "refuse|Queen Elizabeth Hospital|t1|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Queen Elizabeth Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t1"
+   },
+   "_why": "no p50 percentile archived for this triage level -> refuse",
+   "answered": false,
+   "basis": null,
+   "forecast_median": null,
+   "forecast_p25": null,
+   "forecast_p75": null,
+   "n_observations": null,
+   "pooled": null,
+   "verdict": null
+  },
+  "refuse|Queen Elizabeth Hospital|t2|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Queen Elizabeth Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t2"
+   },
+   "_why": "no p50 percentile archived for this triage level -> refuse",
+   "answered": false,
+   "basis": null,
+   "forecast_median": null,
+   "forecast_p25": null,
+   "forecast_p75": null,
+   "n_observations": null,
+   "pooled": null,
+   "verdict": null
+  },
+  "refuse|St John Hospital|t1|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "St John Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t1"
+   },
+   "_why": "no p50 percentile archived for this triage level -> refuse",
+   "answered": false,
+   "basis": null,
+   "forecast_median": null,
+   "forecast_p25": null,
+   "forecast_p75": null,
+   "n_observations": null,
+   "pooled": null,
+   "verdict": null
+  },
+  "refuse|St John Hospital|t2|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "St John Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t2"
+   },
+   "_why": "no p50 percentile archived for this triage level -> refuse",
+   "answered": false,
+   "basis": null,
+   "forecast_median": null,
+   "forecast_p25": null,
+   "forecast_p75": null,
+   "n_observations": null,
+   "pooled": null,
+   "verdict": null
+  },
+  "refuse|Tuen Mun Hospital|t1|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Tuen Mun Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t1"
+   },
+   "_why": "no p50 percentile archived for this triage level -> refuse",
+   "answered": false,
+   "basis": null,
+   "forecast_median": null,
+   "forecast_p25": null,
+   "forecast_p75": null,
+   "n_observations": null,
+   "pooled": null,
+   "verdict": null
+  },
+  "refuse|Tuen Mun Hospital|t2|Monday|14|pub60": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Tuen Mun Hospital",
+    "hour": 14,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t2"
+   },
+   "_why": "no p50 percentile archived for this triage level -> refuse",
+   "answered": false,
+   "basis": null,
+   "forecast_median": null,
+   "forecast_p25": null,
+   "forecast_p75": null,
+   "n_observations": null,
+   "pooled": null,
+   "verdict": null
+  },
+  "stjohn|St John Hospital|t3|Saturday|11|nopub": {
+   "_input": {
+    "day": "Saturday",
+    "hospital": "St John Hospital",
+    "hour": 11,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "Cheung Chau island A&E: forecasts normally, must never be dropped or given a road journey",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 15.0,
+   "forecast_p25": 14.0,
+   "forecast_p75": 16.0,
+   "n_observations": 156,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "stjohn|St John Hospital|t3|Tuesday|2|nopub": {
+   "_input": {
+    "day": "Tuesday",
+    "hospital": "St John Hospital",
+    "hour": 2,
+    "published": null,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "Cheung Chau island A&E: forecasts normally, must never be dropped or given a road journey",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 0,
+   "forecast_p25": 0,
+   "forecast_p75": 14.0,
+   "n_observations": 160,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "thin|all_hours|Queen Mary Hospital|t3|Monday|14": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 14,
+    "keep": 1,
+    "published": 75.0,
+    "section": "thinned_buckets",
+    "thin_hours": "window",
+    "triage": "t3"
+   },
+   "_why": "the whole \u00b11-hour window is too thin -> pooled all-hours fallback, which the UI must label 'not hour-specific'",
+   "answered": true,
+   "basis": "all_hours",
+   "forecast_median": 28.0,
+   "forecast_p25": 25.0,
+   "forecast_p75": 31.0,
+   "n_observations": 23045,
+   "pooled": true,
+   "verdict": "misleading"
+  },
+  "thin|all_hours|Tuen Mun Hospital|t45|Saturday|22": {
+   "_input": {
+    "day": "Saturday",
+    "hospital": "Tuen Mun Hospital",
+    "hour": 22,
+    "keep": 0,
+    "published": 300.0,
+    "section": "thinned_buckets",
+    "thin_hours": "window",
+    "triage": "t45"
+   },
+   "_why": "window emptied entirely -> pooled all-hours fallback",
+   "answered": true,
+   "basis": "all_hours",
+   "forecast_median": 210.0,
+   "forecast_p25": 150.0,
+   "forecast_p75": 300.0,
+   "n_observations": 22955,
+   "pooled": true,
+   "verdict": "reliable"
+  },
+  "thin|hour_window|Queen Mary Hospital|t3|Monday|14": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 14,
+    "keep": 2,
+    "published": 75.0,
+    "section": "thinned_buckets",
+    "thin_hours": "exact",
+    "triage": "t3"
+   },
+   "_why": "exact bucket below min_observations, neighbours intact -> the \u00b11-hour window branch (pooled stays False)",
+   "answered": true,
+   "basis": "hour_window",
+   "forecast_median": 30.0,
+   "forecast_p25": 28.0,
+   "forecast_p75": 33.75,
+   "n_observations": 218,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "thin|hour_window|St John Hospital|t45|Sunday|03": {
+   "_input": {
+    "day": "Sunday",
+    "hospital": "St John Hospital",
+    "hour": 3,
+    "keep": 4,
+    "published": null,
+    "section": "thinned_buckets",
+    "thin_hours": "exact",
+    "triage": "t45"
+   },
+   "_why": "same branch on the smallest-volume hospital, feed down",
+   "answered": true,
+   "basis": "hour_window",
+   "forecast_median": 0.0,
+   "forecast_p25": 0.0,
+   "forecast_p75": 30.0,
+   "n_observations": 252,
+   "pooled": false,
+   "verdict": "no_live_data"
+  },
+  "thin|refuse|Queen Mary Hospital|t3|Monday|14": {
+   "_input": {
+    "day": "Monday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 14,
+    "keep": 0,
+    "published": 75.0,
+    "section": "thinned_buckets",
+    "thin_hours": "all",
+    "triage": "t3"
+   },
+   "_why": "every hour emptied -> nothing left to pool, engine must refuse",
+   "answered": false,
+   "basis": null,
+   "forecast_median": null,
+   "forecast_p25": null,
+   "forecast_p75": null,
+   "n_observations": null,
+   "pooled": null,
+   "verdict": null
+  },
+  "verdict|Queen Mary Hospital|t3|Wednesday|09|pub0": {
+   "_input": {
+    "day": "Wednesday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 9,
+    "published": 0.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "sweeps the reliable/caution/misleading thresholds",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 25.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 28.0,
+   "n_observations": 123,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "verdict|Queen Mary Hospital|t3|Wednesday|09|pub150": {
+   "_input": {
+    "day": "Wednesday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 9,
+    "published": 150.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "sweeps the reliable/caution/misleading thresholds",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 25.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 28.0,
+   "n_observations": 123,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "verdict|Queen Mary Hospital|t3|Wednesday|09|pub30": {
+   "_input": {
+    "day": "Wednesday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 9,
+    "published": 30.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "sweeps the reliable/caution/misleading thresholds",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 25.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 28.0,
+   "n_observations": 123,
+   "pooled": false,
+   "verdict": "reliable"
+  },
+  "verdict|Queen Mary Hospital|t3|Wednesday|09|pub60": {
+   "_input": {
+    "day": "Wednesday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 9,
+    "published": 60.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "sweeps the reliable/caution/misleading thresholds",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 25.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 28.0,
+   "n_observations": 123,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "verdict|Queen Mary Hospital|t3|Wednesday|09|pub600": {
+   "_input": {
+    "day": "Wednesday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 9,
+    "published": 600.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "sweeps the reliable/caution/misleading thresholds",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 25.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 28.0,
+   "n_observations": 123,
+   "pooled": false,
+   "verdict": "misleading"
+  },
+  "verdict|Queen Mary Hospital|t3|Wednesday|09|pub90": {
+   "_input": {
+    "day": "Wednesday",
+    "hospital": "Queen Mary Hospital",
+    "hour": 9,
+    "published": 90.0,
+    "section": "query",
+    "triage": "t3"
+   },
+   "_why": "sweeps the reliable/caution/misleading thresholds",
+   "answered": true,
+   "basis": "exact_hour",
+   "forecast_median": 25.0,
+   "forecast_p25": 21.0,
+   "forecast_p75": 28.0,
+   "n_observations": 123,
+   "pooled": false,
+   "verdict": "misleading"
+  }
+ },
+ "n_cases": 77
+}

@@ -1,0 +1,39 @@
+[project]
+name = "ae-wait-times"
+version = "1.0.0"
+description = "A&E waiting time forecaster, HKUST AI Literacy Course, Path E"
+requires-python = ">=3.10"
+# Flask only, and Flask is pure Python. No compiled wheel has to match the
+# user's CPU, so the identical folder runs on Apple Silicon, Intel Mac, x86
+# Windows and ARM Windows. numpy was the only binary dependency, and stats.py
+# replaces the two functions it was used for (see test_stats.py).
+dependencies = ["flask>=3.0"]
+
+# --- test-only dependencies -------------------------------------------------
+# NOTHING here may ever move into [project].dependencies. The point of
+# stats.py is that the shipped app is pure Python, and numpy exists in this file
+# only so the test suite can PROVE stats.py reproduces numpy's default
+# quantile method, and only on a developer's machine.
+#
+# Two groups on purpose:
+#
+#   dev: installed by a plain `uv sync` / `uv run`. Holds only pytest and
+#           its pure-Python plugin chain (pluggy, iniconfig, packaging), so
+#           `uv run pytest` works out of the box and STILL pulls no compiled
+#           wheel. The numpy-comparison tests importorskip and report as
+#           skipped in this configuration.
+#   test: NOT installed by default. Adds numpy, which does ship a compiled
+#           wheel. Run `uv run --group test pytest` to actually execute the
+#           numpy equivalence proof.
+#
+# See tests/README.md for the exact commands.
+[dependency-groups]
+dev = ["pytest>=8.0"]
+test = ["pytest>=8.0", "numpy>=1.26"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Test modules import `stats`, `engine`, `routing` and `server` as top-level
+# modules, exactly as the app does. engine/ is the rootdir, so put it on the
+# path rather than rewriting the app's own import style.
+pythonpath = ["."]

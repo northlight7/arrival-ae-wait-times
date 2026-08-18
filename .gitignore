@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# uv. LAUNCHER.sh redirects every uv cache and Python install into this folder
+# so deleting the folder removes every trace — none of it belongs in git.
+.uv/
+.uv-cache/
+.uv-python/
+.uv-tools/
+
+# Node
+node_modules/
+
+# Corpus snapshots.
+#
+# The shipped copy is data/ae_corpus.json.gz — engine.load_corpus() prefers a
+# plain .json when one is present, but that plain file is what a local seeder
+# run produces and it is well past GitHub's 100 MB per-file limit. Ignoring it
+# keeps the clone working (the loader falls through to the .gz) without
+# committing a quarter-gigabyte of regenerable JSON.
+data/ae_corpus.json
+
+# Side file written by seed_backfill.py — a work-in-progress backfill that is
+# deliberately not merged into the live corpus.
+data/ae_corpus.next.json
+
+# macOS
+.DS_Store
