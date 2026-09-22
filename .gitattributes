@@ -1,6 +1,13 @@
-# cmd.exe needs CRLF in a batch file; without it `goto` misses its labels.
-*.bat text eol=crlf
-*.cmd text eol=crlf
+# cmd.exe seeks through a batch file as it runs. With LF-only endings that seek
+# can land mid-line and break `goto` into the labels the error paths depend on.
+#
+# `-text` (not `text eol=crlf`) on purpose: `text eol=crlf` stores the blob
+# normalised to LF and converts on checkout, which leaves the CRLF depending on
+# whoever generates the download. `-text` disables conversion entirely, so the
+# exact CRLF bytes are what is stored and what every delivery path hands over:
+# a clone, a raw file download, and GitHub's Download ZIP alike.
+*.bat -text
+*.cmd -text
 
 # Shell scripts must stay LF, even when cloned on Windows.
 *.sh text eol=lf
