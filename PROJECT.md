@@ -16,7 +16,9 @@ Student tutorial written. Fixes are committed locally but NOT yet pushed to GitH
 - [x] Fixed the Windows-fatal `ZoneInfoNotFoundError` (see Decisions)
 - [x] Fixed three smaller launcher faults: unescaped `&` in the .bat `title`,
       LF-only line endings in the .bat, and silenced uv-installer errors
-- [x] `A&E Wait Times - Student Tutorial.docx` written, 13 pages with screenshots
+- [x] `A&E Wait Times - How To Build It.docx` written, 23 pages, 18 copyable prompts
+      (a how-to-USE tutorial was written first and dropped: the brief was how to BUILD it.
+      It is recoverable from git history if ever wanted.)
 - [ ] Push the fixes to https://github.com/northlight7/arrival-ae-wait-times
       (students downloading the ZIP still get the broken Windows build until this happens)
 - [ ] Re-test on a real Windows machine after the push
@@ -46,7 +48,11 @@ Student tutorial written. Fixes are committed locally but NOT yet pushed to GitH
 - `data/ae_corpus.json` (232 MB) and `data/ae_corpus.next.json` (136 MB) are gitignored.
   The shipped corpus is `ae_corpus.json.gz`. `.next.json` is an unmerged backfill and is
   deliberately kept, not stale.
-- Tutorial working files live in `.internal/`: `build_tutorial.py` regenerates the docx
-  from `.internal/screenshots/`. That folder is gitignored.
+- Tutorial working files live in `.internal/` (gitignored): `build_howto.py` regenerates
+  the docx from `.internal/build_shots/` (data portals, MCP config, terminal panels) and
+  `.internal/screenshots/` (the finished app).
+- The tutorial teaches Claude Code but states that any agentic tool works the same. The
+  Google Maps MCP server appears as the way to get the 18 hospital coordinates and to
+  calibrate the travel-time model, not as something the shipped app calls.
 - Two live feeds, both open data, no key: the Hospital Authority A&E board and the
   Transport Department speed detectors.
