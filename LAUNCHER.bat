@@ -8,7 +8,7 @@ REM
 REM macOS users: double-click LAUNCHER.command instead.
 
 setlocal enabledelayedexpansion
-title Arrival - honest A&E waits for Hong Kong
+title Arrival - honest A^&E waits for Hong Kong
 
 set "ROOT=%~dp0"
 set "UV_DIR=%ROOT%.uv"
@@ -45,7 +45,7 @@ if not defined UV (
     echo   First run - setting up. Needs internet; only happens once.
     echo.
     echo   Step 1 of 3: downloading the setup tool...
-    powershell -ExecutionPolicy ByPass -c "$env:UV_UNMANAGED_INSTALL='%UV_DIR%'; irm https://astral.sh/uv/install.ps1 | iex" >nul 2>nul
+    powershell -ExecutionPolicy ByPass -c "$env:UV_UNMANAGED_INSTALL='%UV_DIR%'; irm https://astral.sh/uv/install.ps1 | iex" > "%ROOT%setup-log.txt" 2>&1
     if not exist "%UV_BIN%" goto :no_uv
     set "UV=%UV_BIN%"
 )
@@ -93,6 +93,7 @@ exit /b 0
 :no_uv
 echo.
 echo   Could not download the setup tool.
+echo   The reason is in setup-log.txt, next to this launcher.
 echo.
 echo   Check your internet connection and try again. If you are on a
 echo   university or company network that blocks downloads, try a

@@ -7,7 +7,16 @@ requires-python = ">=3.10"
 # user's CPU, so the identical folder runs on Apple Silicon, Intel Mac, x86
 # Windows and ARM Windows. numpy was the only binary dependency, and stats.py
 # replaces the two functions it was used for (see test_stats.py).
-dependencies = ["flask>=3.0"]
+dependencies = [
+    "flask>=3.0",
+    # Windows ships no IANA time-zone database, so zoneinfo has nothing to read
+    # and engine.py's module-level ZoneInfo("Asia/Hong_Kong") raised
+    # ZoneInfoNotFoundError at import: the server never started at all. macOS
+    # and Linux carry /usr/share/zoneinfo, which is why this only ever showed
+    # up on Windows. tzdata is pure Python (a data package), so it keeps the
+    # no-compiled-wheel promise above intact on x86 and ARM Windows alike.
+    "tzdata>=2024.1; sys_platform == 'win32'",
+]
 
 # --- test-only dependencies -------------------------------------------------
 # NOTHING here may ever move into [project].dependencies. The point of

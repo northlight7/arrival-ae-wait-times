@@ -1,0 +1,7 @@
+# cmd.exe needs CRLF in a batch file; without it `goto` misses its labels.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Shell scripts must stay LF, even when cloned on Windows.
+*.sh text eol=lf
+*.command text eol=lf

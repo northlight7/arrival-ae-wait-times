@@ -79,10 +79,10 @@ import json
 import math
 from collections import defaultdict
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from statistics import median as stat_median
-from zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from stats import median as _median, quantile as _quantile
 
@@ -130,7 +130,19 @@ HOSPITAL_COORDS = {
 # hardcoded +8 so the answer stays right if that ever changes and so the
 # machine's own TZ setting can never leak in.
 
-HK_TZ = ZoneInfo("Asia/Hong_Kong")
+try:
+    HK_TZ = ZoneInfo("Asia/Hong_Kong")
+except ZoneInfoNotFoundError:  # pragma: no cover - only reachable off-Unix
+    # Windows ships no IANA database, so zoneinfo reads it from the `tzdata`
+    # package instead. pyproject declares that on win32, so this branch means
+    # something went wrong with the install rather than with the platform.
+    # Falling back is safe and exact here, not a guess: Hong Kong has observed
+    # UTC+8 with no DST since 1979. The warning is printed because the reason
+    # the lookup is done at all is so a future rule change would be picked up,
+    # and this branch is the one place that would silently stop happening.
+    print("  Warning: no time-zone database found (is tzdata installed?). "
+          "Falling back to a fixed UTC+8 for Hong Kong.")
+    HK_TZ = timezone(timedelta(hours=8))
 
 DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday",
              "Friday", "Saturday", "Sunday"]
@@ -519,7 +531,7 @@ def load_corpus() -> dict:
         if key is not None and _CORPUS_CACHE is not None and _CORPUS_CACHE[0] == key:
             return _CORPUS_CACHE[1]
         if opener is not None:
-            with open(path) as f:
+            with open(path, encoding="utf-8") as f:
                 data = json.load(f)
         else:
             import gzip

@@ -40,16 +40,19 @@ else
     say "First run — setting up. Needs internet; only happens once."
     echo
     say "Step 1 of 3: downloading the setup tool..."
+    # Keep the reason for a failure. Sent to /dev/null, a proxy rejection and
+    # a dead network produce the identical "did not download" message below.
+    LOG="$ROOT/setup-log.txt"
     if command -v curl >/dev/null 2>&1; then
         curl -LsSf https://astral.sh/uv/install.sh \
-            | env UV_UNMANAGED_INSTALL="$UV_DIR" sh >/dev/null 2>&1
+            | env UV_UNMANAGED_INSTALL="$UV_DIR" sh > "$LOG" 2>&1
     elif command -v wget >/dev/null 2>&1; then
         wget -qO- https://astral.sh/uv/install.sh \
-            | env UV_UNMANAGED_INSTALL="$UV_DIR" sh >/dev/null 2>&1
+            | env UV_UNMANAGED_INSTALL="$UV_DIR" sh > "$LOG" 2>&1
     else
         fail "This computer has neither curl nor wget, so nothing can be downloaded."
     fi
-    [ -x "$UV_BIN" ] || fail "The setup tool did not download. Check your internet connection and try again."
+    [ -x "$UV_BIN" ] || fail "The setup tool did not download. Check your internet connection and try again. The reason is in setup-log.txt, next to this launcher."
     UV="$UV_BIN"
 fi
 

@@ -28,3 +28,10 @@ data/ae_corpus.next.json
 
 # macOS
 .DS_Store
+
+# Written by the launchers when the uv install fails, so the reason survives.
+setup-log.txt
+
+# Working material for building the student tutorial (screenshots, build script).
+# Written for the builder, not for a reader of this repo.
+.internal/
